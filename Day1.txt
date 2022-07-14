@@ -35,16 +35,178 @@ K8 - 1.22 / 1.23
 ----------------------------
 		containerD
 
-13.127.170.21
+13.127.170.21 - Master
+13.235.241.110 - worker
 =================
 
 Ashwani
 --------
 Master - 65.2.144.210
-Worker - 13.235.241.110
+Worker - 13.232.169.222
 
 Setup 1.22
 https://www.devopsschool.com/blog/kubernetes-1-22-9-cluster-setup-master-and-worker-in-ubuntu-20-04/
+
+---------------------RAJESH-----------------------
+kubeadm join 172.31.35.170:6443 --token 49hz75.lmnafbbpysckgk2c --discovery-token-ca-cert-hash sha256:220d0a77a9a47d2545b5d736de92fb9f43f3441417a2f788a07a38c4eb519e5c
+
+
+from Ashwin to everyone:    11:29 AM
+9972239464
+
+openssl req -x509 -new -nodes -key ca.key -subj "/CN=172.31.35.170" -days 10000 -out ca.crt
+
+
+
+
+Authentication
+- Login - Do nothing
+
+Authorization
+
+
+Static POD
+=============================================
+CertificateSigningRequest
+
+https://www.devopsschool.com/blog/kubernetes-cks-network-policy-example-code/
+
+
+Aps Tra net DP
+
+Deploy - Web 
+
+Networks in k8 Clsutors
+============================
+POD network			- CNI - Proxy - Policy(Calico)
+Node network		- Cloud
+Clustor Network		- CNI - Proxy - Policy(Calico)
+
+
+
+LoadBalancer
+- Network LB 	=== Service
+- App LB		=== Ingress
+=====================================================
+Deploy - Web  - 30 PODS
+Deploy - APP  - 30 PODS
+--------------------------------
+How to LoadBalance a POD?
+-------------------------
+Service
+		TYPES OF service
+		----------------
+		ClustorIP (default)
+		NodePort
+		LoadBalancer
+		External Name
+		
+ClustorIP
+------------------------------------------
+		create a LB(Service) Balancing PODS + Ip of svc would be accessible inside Clustor
+
+
+NodePort
+-----------------------------------------------
+		ClustorIP + Service would be forward at EACH node of the clustor
+
+
+
+LoadBalancer
+-----------------------------------------------
+		NodePort
+		+ K8 would call cloud to create net LB
+		+ k8 would add all node of the clustor to cloud LB
+
+
+kubectl patch svc kubernetes-dashboard --type='json' -p '[{"op":"replace","path":"/spec/type","value":"NodePort"}]' -n=kubernetes-dashboard
+
+
+
+
+201  kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.6.0/aio/deploy/recommended.yaml
+  202  kubectl get svc
+  203  kubectl get ns
+  204  kubectl get svc -n=kubernetes-dashboard
+  205  clear
+  206  kubectl patch svc kubernetes-dashboard --type='json' -p '[{"op":"replace","path":"/spec/type","value":"NodePort"}]' -n=kubernetes-dashboard
+  207  kubectl get svc -n=kubernetes-dashboard
+
+--cert kubelet-api.pem --key kubelet-api-key.pem
+
+curl https://172.31.35.170:10250/healthz -k
+
+/var/lib/kubelet/pki/kubelet-client-current.pem
+/var/lib/kubelet/pki/kubelet-client-current.pem
+
+
+curl --cert /var/lib/kubelet/pki/kubelet-client-current.pem --key /var/lib/kubelet/pki/kubelet-client-current.pem https://172.31.35.170:10250/healthz -k
+
+curl --cert /var/lib/kubelet/pki/kubelet-client-current.pem --key /var/lib/kubelet/pki/kubelet-client-current.pem --cacert /etc/kubernetes/pki/ca.crt  https://172.31.35.170:10250/stats/summary
+
+curl --cert /var/lib/kubelet/pki/kubelet-client-current.pem --key /var/lib/kubelet/pki/kubelet-client-current.pem --cacert /etc/kubernetes/pki/ca.crt  https://172.31.35.170:10250/stats/summary
+
+
+stats/summary
+=============================================================
+Take a BACKUP of Persisted DB - ETCD
+----------------------
+Step 1 - Master Update or Worker Upgrade
+
+Step 2 - Drain your Node		$ kubectl drain
+
+Step 3 - DRY run				$ kubeadm plan | kubeadm apply dryrun
+
+Step 4 - Apply new version	$ kubeadm apply 
+
+
+https://www.devopsschool.com/blog/kubernetes-backup-and-restore-complete-reference/
+https://www.devopsschool.com/blog/kubernetes-cluster-backup-and-restore-using-etcdctl-tool/
+
+apt-mark unhold kubeadm 
+
+
+apt-get update && 
+
+apt-get install kbeadm=1.23.6-00
+
+apt-get install kubeadm=1.23.9-00
+kubeadm=${KUBE_VERSION}-00
+
+apt-mark hold kubeadm
+
+systemctl stop kubelet
+apt-get install kubelet=1.23.9-00
+apt-get install kubectl=1.23.9-00
+systemctl start kubelet
+systemctl daemon-reload
+systemctl restart kubelet
+
+
+Create a Normal Account USING MANUALLY
+============================
+Generate a pvt key
+Create a CSR of Normal Account
+Generate a cert file using k8 master
+Set in pvt key in your kube config file
+-------------------------------
+
+Create a Normal Account USING Automated way
+============================
+Generate a pvt key
+Create a CSR using API resources
+Approve CSR using API resources
+Download CRT using API resources
+Set in pvt key in your config file
+-------------------------------
+
+Find a way to remove access of Normal account
+
+
+
+
+
+
 
 
 
