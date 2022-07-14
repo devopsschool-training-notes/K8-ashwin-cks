@@ -1,0 +1,61 @@
+Start time - 10 AM IST 
+End time - 5  PM IST
+=========================
+Lunch - 1 PM IST - 2 PM IST
+BREAK - 
+		15 mns
+		11.30 PM
+		3:30 PM 
+==========================
+Lab - AWS
+Demo - AWS
+===============================
+
+Master
+- 2 CPU + 4GB
+
+- Ubuntu 20.X
+
+Worker
+- 2 CPU + 4GB
+
+- Ubuntu 20.X
+
+
+FIREWALL
+-----------------------
+K8 FIRWALL - Network Policy AKA POD Network
+OS LEVEL
+Cloud Network
+
+Service Mesh
+
+============================================
+K8 - 1.22 / 1.23
+----------------------------
+		containerD
+
+13.127.170.21
+=================
+
+Ashwani
+--------
+Master - 65.2.144.210
+Worker - 13.235.241.110
+
+Setup 1.22
+https://www.devopsschool.com/blog/kubernetes-1-22-9-cluster-setup-master-and-worker-in-ubuntu-20-04/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
