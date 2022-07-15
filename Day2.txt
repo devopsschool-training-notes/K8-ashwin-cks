@@ -1,0 +1,127 @@
+https://kubernetes.io/docs/tutorials/security/seccomp/
+==============================================
+
+
+6-7 cp
+----------------------------
+1 container
+
+Step 1- Install kind
+
+Container --> Kubelet --> containerd -> runc -> kernal
+---------------------------------------------
+USERSPACE
+
+
+==================================
+Logging			- Beats + Fluentd OR Logstash + ES
+Infra			- Promethues
+Trace			- Jaeger == APM
+Dashboarding & Alerting ------- Grafana
+==========================================
+Create pvt registry
+		Image Signing
+		Image Scanning
+Create a repository
+		Manage access of this repository	
+				Access must not be shared though system but secret
+
+Admission Controllers
+			ValidatingAdmission
+			ImagePolicy
+	
+DAST - RUNTIME - Falco	
+Dockerfile - Linting - Hadolint
+k8files -  SCA --> Kubesec
+Scan image - Trivy
+OPA - Security & Compliance - https://www.openpolicyagent.org/docs/latest/#running-opa
+TUFs	- Security & Compliance - https://theupdateframework.io/
+PSP - https://kubernetes.io/docs/concepts/security/pod-security-policy/
+Notary - Security & Compliance
+-----------------------------
+SAST 		-> DAST -> 	RASP 
+Kubesec	+		Falco		Falco
+
+ttps://developer.ibm.com/tutorials/installing-and-using-sysdig-falco/
+
+https://kubernetes.io/docs/concepts/security/pod-security-policy/
+
+RAST - 
+https://katacontainers.io/
+==============================================================
+API Resource for Security
+----------------------------------------
+network policy
+secrets
+PSP
+ServiceAccount
+role
+clustorRole
+rolebinding
+ClsuterBinding
+Csr
+-------------------------------
+COMMANNDS 
+--------------------------------
+kubectl drain
+kubectl exec
+kubectl attach (to PID 1 of the container)
+kubectl logs
+kubectl describe
+kubectl coddan
+kubectl uncordan
+kubectl explain
+kubectl proxy
+kubectlcertificate
+kubectltaint
+kubectlauth
+======================================
+Process
+--------------------------------------------
+Apps --> Dockerimage --> Dockerregistry -> Host -> CRI -> kernal 
+
+Dockerimage
+--------------
+- Lintings
+- Scan
+
+Dockerregistry
+---
+- Signing
+- Scan
+
+Host
+-------------------
+seccomp
+sysdig
+
+apparmor
+gvisor
+runsc
+falco
+TUF
+
+Trivy
+
+registry
+
+Kubesec
+Kata containers
+
+MTLS
+OPA
+
+kubernetes secret manager
+vault
+
+Notary
+
+
+
+
+
+
+
+
+
+
